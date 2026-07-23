@@ -46,3 +46,17 @@ for i, row in data.iterrows():
 
 data["profit_loss"] = profit_loss
 print(f"Загальний прибуток/збиток: {sum(profit_loss):.2f}")
+
+import matplotlib.pyplot as plt
+plt.figure(figsize=(12,8))
+plt.plot(data.index, data["Close"], color="slategray",label='Ціна')
+plt.plot(data.index, data["SMA"], color="skyblue", label='SMA (20 днів)')
+plt.plot(data.index, data["LMA"], color="lightpink", label='LMA (50 днів)')
+
+plt.scatter(entry_dates, entry_prices, color='green', label='Вхід (Купуємо)')
+plt.scatter(exit_dates, exit_prices, color='red', label='Вихід (Продаємо)')
+plt.title("Графік з ковзними середніми та точками входу/виходу з позиції")
+plt.xlabel("Дата")
+plt.ylabel("Ціна")
+plt.legend()
+plt.show()
